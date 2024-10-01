@@ -1,6 +1,7 @@
 package com.mdi.learnkotlinaksamedia.ui.components
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,15 +18,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SlideIndicator(activeIndex: Int, onClick: (index: Int) -> Unit, modifier: Modifier = Modifier) {
+fun SlideIndicator(pagerState: PagerState, onClick: (index: Int) -> Unit, modifier: Modifier = Modifier) {
 
     Row(
         modifier = modifier
     ) {
         for (i in 0..2) {
             val width by animateDpAsState(
-                targetValue = if (activeIndex == i) 20.dp else 4.dp,
+                targetValue = if (pagerState.currentPage == i) 20.dp else 4.dp,
                 label = "Circle's width"
             )
 
